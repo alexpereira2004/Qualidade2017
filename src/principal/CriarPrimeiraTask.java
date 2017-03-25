@@ -1,3 +1,4 @@
+package principal;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -5,8 +6,8 @@ public class CriarPrimeiraTask {
 
   public static Test suite() {
     TestSuite suite = new TestSuite();
-    suite.addTestSuite(Criar Primeira Task.class);
-    suite.addTestSuite(Adicionando Tempo de Trabalho.class);
+//    suite.addTestSuite(Criar Primeira Task.class);
+//    suite.addTestSuite(Adicionando Tempo de Trabalho.class);
     return suite;
   }
 

@@ -28,8 +28,9 @@ public class LoginSucesso {
 
   @Test
   public void testLoginSucesso() throws Exception {
-    driver.get(baseUrl + "/");
-    driver.findElement(By.linkText("Entrar")).click();
+    driver.get(baseUrl);
+//    driver.findElement(By.linkText("Entrar")).click();
+    driver.findElement(By.linkText("Sign in")).click();
     driver.findElement(By.id("username")).clear();
     driver.findElement(By.id("username")).sendKeys("alexpereira2004");
     driver.findElement(By.id("password")).clear();
