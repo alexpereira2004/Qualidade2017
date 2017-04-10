@@ -7,19 +7,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Login {
-	private WebDriver driver;
-	private WebElement BotaoEntrar;
-	private String baseUrl;
-	
+public class Login extends PageObjectBase {
+
 	private WebElement username;
 	private WebElement password;
 	private WebElement login;
 	private WebElement checkManterLogado;
+	private WebElement BotaoEntrar;
 
 	public Login(WebDriver driver) {
- 
-	    
 	    this.username    = driver.findElement(By.id("username"));
 	    this.password    = driver.findElement(By.id("password"));
 	    this.BotaoEntrar 	   = driver.findElement(By.name("login"));
@@ -28,10 +24,6 @@ public class Login {
 
 	public WebElement getCheckManterLogado() {
 		return checkManterLogado;
-	}
-
-	public WebDriver getDriver() {
-		return driver;
 	}
 
 	public WebElement getBotaoEntrar() {

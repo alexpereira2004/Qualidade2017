@@ -1,64 +1,39 @@
-package principal;
+package produto;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.*;
-
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import helpers.DriverSelenium;
-
-public class AdicionandoTempoDeTrabalho {
+public class EditarUmaTarefaJaExistente {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-  private DriverSelenium Selenium;
 
   @Before
   public void setUp() throws Exception {
-	  Selenium = new DriverSelenium();
-	  driver = Selenium.getDriver();
-//	System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201630648\\Downloads\\geckodriver.exe");
-//	driver = new FirefoxDriver();
-//    baseUrl = "http://www.hostedredmine.com/";
-//    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver = new FirefoxDriver();
+    baseUrl = "http://www.hostedredmine.com/";
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
   @Test
-  public void testAdicionandoTempoDeTrabalho() throws Exception {
-    //driver.get(baseUrl + "/projects/qualidade-de-software-2017/issues/gantt");
-
-//    driver.findElement(By.linkText("Entrar")).click();
-//    
-//    driver.findElement(By.id("username")).clear();
-//    driver.findElement(By.id("username")).sendKeys("alexpereira2004");
-//    
-//    
-//    driver.findElement(By.id("password")).clear();
-//    driver.findElement(By.id("password")).sendKeys("colorado");
-//    
-//    
-//    driver.findElement(By.name("login")).click();
-
+  public void testEditarUmaTarefaJaExistente() throws Exception {
+    driver.get(baseUrl + "/");
     new Select(driver.findElement(By.id("project_quick_jump_box"))).selectByVisibleText("Qualidade de Software 2017");
-    driver.findElement(By.linkText("Task")).click();
-    driver.findElement(By.linkText("644333")).click();
-
-    driver.findElement(By.linkText("Tempo de trabalho")).click();
-    driver.findElement(By.id("time_entry_hours")).clear();
-    driver.findElement(By.id("time_entry_hours")).sendKeys("1");
-    driver.findElement(By.id("time_entry_comments")).clear();
-    driver.findElement(By.id("time_entry_comments")).sendKeys("Adicionando tempo gasto na tarefa");
-    driver.findElement(By.name("commit")).click();
+    driver.findElement(By.linkText("Tarefas")).click();
+    driver.findElement(By.linkText("649895")).click();
+    driver.findElement(By.linkText("Editar")).click();
+    driver.findElement(By.id("issue_subject")).clear();
+    driver.findElement(By.id("issue_subject")).sendKeys("Nome Editado");
+    driver.findElement(By.cssSelector("#issue-form > input[name=\"commit\"]")).click();
+    assertEquals("Alterado com sucesso.", driver.findElement(By.id("flash_notice")).getText());
   }
-
 
   @After
   public void tearDown() throws Exception {

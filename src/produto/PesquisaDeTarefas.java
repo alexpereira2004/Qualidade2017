@@ -1,41 +1,58 @@
-package principal;
+package produto;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.*;
-
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginSucesso {
+import helpers.Comandos;
+import helpers.DriverSelenium;
+import helpers.Login;
+import pageobjects.MenuVertical;
+import pageobjects.Tarefas;
+import pageobjects.VisaoGeral;
+
+public class PesquisaDeTarefas {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+  private DriverSelenium DriverConfig;
+  
+  
+  private VisaoGeral PaginaVisaoGeral;
+  private Login SessaoSistema;
+  private Tarefas PaginaTarefas;
+  private MenuVertical Menu;
 
   @Before
   public void setUp() throws Exception {
-	System.setProperty("webdriver.firefox.marionette","D:\\Java\\geckodriver.exe");
-	driver = new FirefoxDriver();
-    baseUrl = "http://www.hostedredmine.com/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  DriverConfig = new DriverSelenium();
+	  driver = DriverConfig.getDriver();
   }
 
   @Test
-  public void testLoginSucesso() throws Exception {
-    driver.get(baseUrl);
+  public void testPesquisaDeTarefas() throws Exception {
 
-    driver.findElement(By.linkText("Entrar")).click();
-    driver.findElement(By.id("username")).clear();
-    driver.findElement(By.id("username")).sendKeys("alexpereira2004");
-    driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("colorado");
-    driver.findElement(By.name("login")).click();
+	  SessaoSistema = new Login();
+	  SessaoSistema.RealizarLoginUsuario(driver);
+
+	  Menu = new MenuVertical(driver);
+	  Comandos.click(Menu.getTarefas());
+
+	  PaginaTarefas = new Tarefas(driver);
+	  Comandos.selectByVisibleText(PaginaTarefas.getFiltroSituacao(), "igual a");
+	  Comandos.selectByValue(PaginaTarefas.getFiltroSituacaoOpcao(), "1");
+	  
+	  Comandos.click(PaginaTarefas.getBotaoAplicar());
+	  
+	  PaginaTarefas = new Tarefas(driver);
+	  Comandos.testarValorIgual(PaginaTarefas.getPrimeiraLinhaResultadoPesquisa().getText(), "New");
+
   }
 
   @After

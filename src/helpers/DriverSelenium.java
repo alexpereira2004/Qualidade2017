@@ -11,13 +11,13 @@ public class DriverSelenium {
 	
 	public DriverSelenium() {
 		if (driver == null) {
+			System.setProperty("webdriver.firefox.marionette","D:\\Java\\geckodriver.exe");
 			System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201630648\\Downloads\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			baseUrl = "http://www.hostedredmine.com/";
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.get(baseUrl);
 		}
-//	    return driver;
 	}
 	
 	public WebDriver getDriver() {

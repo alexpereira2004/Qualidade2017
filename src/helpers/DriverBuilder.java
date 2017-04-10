@@ -10,7 +10,8 @@ public class DriverBuilder {
 	private String baseUrl;
 	
 	public DriverBuilder() {
-		System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201630648\\Downloads\\geckodriver.exe");
+//		System.setProperty("webdriver.firefox.marionette","C:\\Users\\alu201630648\\Downloads\\geckodriver.exe");
+		System.setProperty("webdriver.firefox.marionette","D:\\Java\\geckodriver.exe");
 		driver = new FirefoxDriver();
 	    baseUrl = "http://www.hostedredmine.com/";
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
