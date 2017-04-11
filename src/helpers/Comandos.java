@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import org.hamcrest.CoreMatchers;
+
 public class Comandos {
 
 	public static void clearAndSendKeys(WebElement element, String text) {
@@ -25,7 +27,14 @@ public class Comandos {
 	}
 	
 	public static void testarValorIgual(String valor1, String valor2) {
-		assertEquals(valor1, valor2);		
+		assertEquals(valor1, valor2);
+	}
+	public static void testarSeValorContem(String Referencia, String Contem) {
+		assertThat(Referencia, CoreMatchers.containsString(Contem));	
+	}
+	
+	public static void preencher(WebElement elemento, String texto) {
+		elemento.sendKeys(texto);
 	}
 	
 
