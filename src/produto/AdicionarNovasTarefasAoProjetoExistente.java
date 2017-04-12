@@ -56,6 +56,8 @@ public class AdicionarNovasTarefasAoProjetoExistente {
 
 	  ResumoDaTarefa PaginaResumoTarefa = new ResumoDaTarefa(driver);
 	  
+	  PaginaResumoTarefa.setMensagemRetorno();
+	  
 	  Comandos.testarSeValorContem(PaginaResumoTarefa.getMensagemRetorno().getText(), "criada.");
 	  
   }

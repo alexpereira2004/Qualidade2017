@@ -9,6 +9,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import helpers.Comandos;
+import helpers.DriverSelenium;
+import helpers.Login;
+import pageobjects.MenuVertical;
+import pageobjects.ResumoDaTarefa;
+import pageobjects.Tarefas;
+import pageobjects.TempoGasto;
+
 public class InformarQuantidadeDeHorasTrabalhadas {
   private WebDriver driver;
   private String baseUrl;
@@ -17,22 +25,30 @@ public class InformarQuantidadeDeHorasTrabalhadas {
 
   @Before
   public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://www.hostedredmine.com/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  DriverSelenium DriverConfig = new DriverSelenium();
+	  driver = DriverConfig.getDriver();
   }
 
   @Test
   public void testInformarQuantidadeDeHorasTrabalhadas() throws Exception {
-    driver.get(baseUrl + "/");
-    new Select(driver.findElement(By.id("project_quick_jump_box"))).selectByVisibleText("Qualidade de Software 2017");
-    driver.findElement(By.linkText("Tarefas")).click();
-    driver.findElement(By.linkText("649895")).click();
-    driver.findElement(By.linkText("Editar")).click();
-    driver.findElement(By.id("issue_subject")).clear();
-    driver.findElement(By.id("issue_subject")).sendKeys("Nome Editado");
-    driver.findElement(By.cssSelector("#issue-form > input[name=\"commit\"]")).click();
-    assertEquals("Alterado com sucesso.", driver.findElement(By.id("flash_notice")).getText());
+    
+	  Login SessaoSistema = new Login();
+	  SessaoSistema.RealizarLoginUsuario(driver);
+	  
+	  MenuVertical Menu = new MenuVertical(driver);
+	  Comandos.click(Menu.getTarefas());
+	  
+	  Tarefas PaginaTarefas = new Tarefas(driver);
+	  Comandos.click(PaginaTarefas.getLinkPrimeiraTarefaDaListagem());
+	  
+	  ResumoDaTarefa PaginaResumoDaTarefa = new ResumoDaTarefa(driver);
+	  Comandos.click(PaginaResumoDaTarefa.getBotaoTempoDeTrabalho());
+	  
+	  TempoGasto PaginaTempoGasto = new TempoGasto(driver);
+	  Comandos.preencher(PaginaTempoGasto.getHoras(), "1");
+	  Comandos.preencher(PaginaTempoGasto.getComentario(), "Apontamento de horas feito para testes");
+	  Comandos.click(PaginaTempoGasto.getBotaoCriar());
+
   }
 
   @After

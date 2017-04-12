@@ -17,8 +17,10 @@ public class EdicaoDeTarefa {
 	private WebElement TempoGasto;
 	private WebElement Comentario;
 	private WebElement BotaoEnviar;
+	private WebDriver driver;
 	
 	public EdicaoDeTarefa(WebDriver driver) {
+		this.driver = driver;
 		this.setSelectTipo(driver.findElement(By.id("issue_tracker_id")));
 		this.setTitulo(driver.findElement(By.id("issue_subject")));
 		this.setDescricao(driver.findElement(By.id("issue_description")));
@@ -27,10 +29,8 @@ public class EdicaoDeTarefa {
 		this.setInicio(driver.findElement(By.id("issue_start_date")));
 		this.setDataPrevista(driver.findElement(By.id("issue_due_date")));
 		this.setTempoEstimado(driver.findElement(By.id("issue_estimated_hours")));
-		this.setBotaoEnviar(driver.findElement(By.name("commit")));
-//		this.setBotaoCriar(driver.findElement(By.id("issue_tracker_id")));
-//		this.setTempoGasto(driver.findElement(By.id("issue_tracker_id")));
-//		this.setComentario(driver.findElement(By.id("issue_tracker_id")));
+		this.setBotaoEnviar();
+
 		
 	}
 	
@@ -105,5 +105,8 @@ public class EdicaoDeTarefa {
 	}
 	public void setBotaoEnviar(WebElement botaoEnviar) {
 		BotaoEnviar = botaoEnviar;
+	}
+	public void setBotaoEnviar() {
+		BotaoEnviar = driver.findElement(By.name("commit"));
 	}
 }

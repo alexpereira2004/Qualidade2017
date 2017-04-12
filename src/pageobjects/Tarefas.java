@@ -13,6 +13,7 @@ public class Tarefas {
 	private WebElement ListagemResultadoPesquisa;
 	private WebElement BotaoNovaTarefa;
 	private WebElement PrimeiraLinhaResultadoPesquisa;
+	private WebElement LinkPrimeiraTarefaDaListagem;
 	
 
 
@@ -25,6 +26,7 @@ public class Tarefas {
 		this.setBotaoAplicar(driver.findElement(By.linkText("Aplicar")));
 		this.setBotaoNovaTarefa(driver.findElement(By.xpath("(//a[contains(text(),'Nova tarefa')])[2]")));
 		this.setPrimeiraLinhaResultadoPesquisa(driver.findElement(By.xpath("//div/table/tbody/tr/td[4]")));
+		this.setLinkPrimeiraTarefaDaListagem(driver.findElement(By.xpath("//tr[2]/td[2]/a")));
 
 	}
 
@@ -90,6 +92,14 @@ public class Tarefas {
 
 	public void setBotaoNovaTarefa(WebElement botaoNovaTarefa) {
 		BotaoNovaTarefa = botaoNovaTarefa;
+	}
+
+	public WebElement getLinkPrimeiraTarefaDaListagem() {
+		return LinkPrimeiraTarefaDaListagem;
+	}
+
+	public void setLinkPrimeiraTarefaDaListagem(WebElement linkPrimeiraTarefaDaListagem) {
+		LinkPrimeiraTarefaDaListagem = linkPrimeiraTarefaDaListagem;
 	}
 	
 }
